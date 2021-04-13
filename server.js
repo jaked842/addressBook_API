@@ -1,10 +1,9 @@
 const http = require('http');
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const knex = require('knex');
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 const db = knex({
