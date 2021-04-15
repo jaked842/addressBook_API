@@ -1,42 +1,42 @@
 
 const changeaddressController = (req, res, db) => {
-    const { oldName, newName, oldAddress, newAddress, oldNumber, newNumber } = req.body
-    const updateName = (oldName, newName) => {
-        db('address')
+    const {newName, newAddress, newNumber, id } = req.body
+    const updateName = (newName, id) => {
+        db('address').orderBy('id')
         .update({
             name: newName
         })
-        .where('name', '=', oldName)
+        .where('id', '=', id)
         .returning('name')
         .then(name => res.json(name))
     }
     
-    const updateAddress = (oldAddress, newAddress) => {
+    const updateAddress = (newAddress, id) => {
         db('address')
         .update({
             address: newAddress
         })
-        .where('address', '=', oldAddress)
+        .where('id', '=', id)
         .returning('address')
         .then(address => res.json(address))
     }
 
-    const updateNumber = (oldNumber, newNumber) => {
+    const updateNumber = (newNumber, id) => {
         db('address')
         .update({
             phone: newNumber
         })
-        .where('phone', '=', oldNumber)
+        .where('id', '=', id)
         .returning('phone')
         .then(number => res.json(number))
     }
 
-    if(oldName) {
-        updateName(oldName, newName)
-    } else if (oldAddress) {
-        updateAddress(oldAddress, newAddress)
-    } else if (oldNumber) {
-        updateNumber(oldNumber, newNumber)
+    if(newName) {
+        updateName(newName, id)
+    } else if (newAddress) {
+        updateAddress(newAddress, id)
+    } else if (newNumber) {
+        updateNumber(newNumber, id)
     }
     
 }
