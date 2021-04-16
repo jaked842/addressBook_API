@@ -24,8 +24,10 @@ const add = require('./controllers/add_controller');
 const addresslist = require('./controllers/addresslist_controller');
 const changeaddress = require('./controllers/changeaddress_controller');
 const removeaddress = require('./controllers/removeaddress_controller');
+const deleteall = require('./controllers/deleteall_controller');
 
 app.post('/add', (req, res) => {add.addController(req,res, db)});
 app.get('/addresslist', (req, res) => {addresslist.addresslistController(req, res, db)});
 app.post('/changeaddress', (req, res) => {changeaddress.changeaddressController(req, res, db)});
 app.delete('/removeaddress', (req, res) => {removeaddress.removeaddressController(req, res, db)});
+app.delete('/deleteall', (req, res) => {deleteall.DeleteallController(req, res, db)});
