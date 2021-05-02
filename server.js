@@ -12,7 +12,7 @@ const db = knex({
         host: '127.0.0.1',
         user: '',
         password: '',
-        database: 'addressbook'
+        database: 'address'
     }
 });
 
@@ -30,4 +30,4 @@ app.post('/add', (req, res) => {add.addController(req,res, db)});
 app.get('/addresslist', (req, res) => {addresslist.addresslistController(req, res, db)});
 app.post('/changeaddress', (req, res) => {changeaddress.changeaddressController(req, res, db)});
 app.delete('/removeaddress', (req, res) => {removeaddress.removeaddressController(req, res, db)});
-app.delete('/deleteall', (req, res) => {deleteall.DeleteallController(req, res, db)});
+app.delete('/deleteall', (req, res) => {deleteall.deleteallController(req, res, db)});

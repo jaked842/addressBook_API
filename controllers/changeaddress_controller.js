@@ -1,16 +1,24 @@
+const { default: knex } = require("knex")
 
 const changeaddressController = (req, res, db) => {
-    const { list } = req.body
-    list.forEach(element => {
-        db('address')
-        .insert({
-            name: element.name,
-            address: element.address,
-            phone: element.phone
+
+        const { list } = req.body
+        let arr = [...list]
+
+        arr.map((value, index) => {
+            db('address')
+            .insert({
+                name: value.name,
+                address: value.address,
+                phone: value.phone
+            })
+            .returning('name')
+            .then(response => {
+                if (index + 1 === arr.length){
+                    res.json('ChangeMade')
+                }
+            })
         })
-    })
-    .returning('name')
-    .then(name => res.json(name))
 }
 
 module.exports = {changeaddressController : changeaddressController}
