@@ -1,9 +1,10 @@
 
 const removeaddressController = (req, res, db) => {
-    const { name } = req.body;
+    const { id } = req.body;
     db('address')
-        .where('name', name)
-        .del('name')
+        .where('id', '=', id)
+        .del()
+        .returning('name')
         .then(name => res.json(name))
 }
 

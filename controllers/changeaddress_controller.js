@@ -5,12 +5,17 @@ const changeaddressController = (req, res, db) => {
         const { list } = req.body
         let arr = [...list]
 
+
         arr.map((value, index) => {
-            db('address')
-            .insert({
+            let ph = '';
+            for (i = 0; i < value.phone.length; i++) {
+                ph += value.phone.charAt(i).replace('-', '')
+            }
+
+            db('address').insert({
                 name: value.name,
                 address: value.address,
-                phone: value.phone
+                phone: ph
             })
             .returning('name')
             .then(response => {
